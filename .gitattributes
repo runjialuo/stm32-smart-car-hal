@@ -1,0 +1,46 @@
+# ============================================================================
+# .gitattributes —— 告诉 Git 哪些文件是文本、哪些是二进制
+#
+# 核心作用：避免 Windows(CRLF) 和 Linux/macOS(LF) 之间来回提交时
+#           把整个文件都算成"改动"，导致 diff 一片红绿、历史无法阅读。
+# ============================================================================
+
+# 让 Git 自动判断文本文件，并统一以 LF 存进仓库（工作区保持系统默认换行）
+* text=auto
+
+# ---- 明确的文本文件（这几类一定是文本，别让 Git 猜错）----
+*.c             text
+*.h             text
+*.s             text
+*.S             text
+*.ld            text
+*.ioc           text
+*.txt           text
+*.md            text
+*.json          text
+*.cmake         text
+CMakeLists.txt  text
+.gitignore      text
+.gitattributes  text
+
+# ---- 二进制文件（绝对不做换行符转换，否则文件会损坏）----
+*.elf   binary
+*.bin   binary
+*.hex   binary
+*.axf   binary
+*.o     binary
+*.obj   binary
+*.a     binary
+*.lib   binary
+*.map   binary
+*.su    binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.pdf   binary
+*.zip   binary
+*.7z    binary
+
+# ---- 第三方代码不做 diff 统计（ST 官方 HAL 库，不是本项目写的）----
+Drivers/**  linguist-vendored
