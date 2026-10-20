@@ -1,0 +1,62 @@
+{
+    // 构建任务说明：
+    //   Ctrl+Shift+B  -> 触发 isDefault 的任务，即「Rebuild (fresh 从零重建)」
+    //   Ctrl+Shift+P  -> "Tasks: Run Task" -> 手动挑某一个
+    //
+    // 两者区别：
+    //   Build  (增量)           只编译改动过的源文件，日常改代码用这个，几秒钟完事。
+    //   Rebuild (fresh 从零重建) 删掉 build\Debug -> 重新配置 -> 全量编译。
+    //                            工程目录改名 / 挪位置 / 换工具链 / CMakeLists 结构大改
+    //                            之后必须用它：build/Debug 里的 CMakeCache.txt、build.ninja、
+    //                            compile_commands.json 存的全是"写死的绝对路径"，路径一变就全失效。
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "STM32: Build (增量)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "增量编译：只编改动过的 .c，日常用这个"
+        },
+        {
+            "label": "STM32: Rebuild (fresh 从零重建)",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "rmdir /s /q build\\Debug 2>nul & cmake --preset Debug && cmake --build --preset Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "删 build/Debug -> 重新配置 -> 全量编译（目录改名/挪动后必须用它）"
+        }
+    ]
+}
