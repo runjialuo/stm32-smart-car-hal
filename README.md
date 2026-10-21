@@ -39,7 +39,7 @@
 | 9 | 下载调试 | ST-Link V2 | 1 |
 | 10 | 供电 | 4× 5 号电池盒（6V）+ AMS1117-3.3 | 1 套 |
 
-> 接线细节见 [`Hardware.txt`](Hardware.txt)（含各模块具体接法）。
+> 接线细节见 [`Hardware.md`](Hardware.md)（含各模块具体接法）。
 
 ---
 
@@ -106,7 +106,7 @@
 ├── CMakePresets.json               # 构建预设（Debug / Release）
 ├── STM32F103xx_FLASH.ld            # 链接脚本
 ├── STM32_Hal_Car_Projects.ioc      # CubeMX 工程文件
-└── Hardware.txt                    # 接线说明
+└── Hardware.md                     # 接线说明
 ```
 
 ### 模块划分
@@ -262,5 +262,5 @@ Right = IR_BASE_Speed − Error × Turn_Gain
 
 ## 相关文档
 
-- [`Hardware.txt`](Hardware.txt) —— 各模块详细接线说明
+- [`Hardware.md`](Hardware.md) —— 各模块详细接线说明
 - `STM32_Hal_Car_Projects.ioc` —— 用 STM32CubeMX 打开可查看/修改全部外设配置
